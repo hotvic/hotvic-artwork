@@ -342,6 +342,9 @@ awful.rules.rules = {
     {rule = {class = "MPlayer"},
         properties = {floating = true}
     },
+    {rule = {class = "Pavucontrol"},
+        properties = {floating = true}
+    },
     {rule = {class = "pinentry"},
         properties = {floating = true}
     },
