@@ -97,7 +97,7 @@ myawesomemenu = {
 }
 
 appsmenu = {
-    {"Aurora",  "aurora",   beautiful.aurora_icon},
+    {"Aurora",  "env MOZ_DISABLE_PANGO=1 aurora",   beautiful.aurora_icon},
     {"Carrier", "carrier",  beautiful.carrier_icon},
     {"Exaile",  "exaile",   beautiful.exaile_icon},
     {"GIMP",    "gimp",     beautiful.gimp_icon}
@@ -332,6 +332,7 @@ awful.rules.rules = {
     -- All clients will match this rule.
     {rule = { },
         properties = {
+            size_hints_honor = false,
             border_width = beautiful.border_width,
             border_color = beautiful.border_normal,
             focus = awful.client.focus.filter,
@@ -342,14 +343,19 @@ awful.rules.rules = {
     {rule = {class = "MPlayer"},
         properties = {floating = true}
     },
+    {rule = {class = "Eclipse"},
+        properties = {tag = tags[1][3]}
+    },
     {rule = {class = "Pavucontrol"},
         properties = {floating = true}
     },
     {rule = {class = "pinentry"},
         properties = {floating = true}
     },
-    {rule = {class = "gimp"},
-        properties = {floating = true}
+    {rule = {class = "Gimp", role = "gimp-image-window"},
+        properties = {tag = tags[1][4],
+            floating = false,
+        }
     },
     {rule = {class = "Carrier", role = "buddy_list"},
         properties = {tag = tags[1][9],
@@ -361,6 +367,11 @@ awful.rules.rules = {
             c:struts({right = winwidth})
             c:geometry({x = w_area.width - winwidth, width = winwidth, y = w_area.y, height = w_area.height})
         end
+    },
+    {rule = {class = "Aurora", role = "browser"},
+        properties = {tag = tags[1][1],
+            border_width = 0,
+        }
     },
     {rule = {class = "Carrier", role = "conversation"},
         properties = {tag = tags[1][9],
@@ -439,4 +450,19 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- Remove borders of maximized windows
+for s = 1, screen.count() do screen[s]:add_signal("arrange", function ()
+    local clients = awful.client.visible(s)
+                                                                                                                                                            
+    for _, c in pairs(clients) do
+        if c.maximized_horizontal and c.maximized_vertical then
+            c.border_width = 0 
+        elseif #clients == 1 then
+            c.border_width = 0 
+        else
+            c.border_width = beautiful.border_width
+        end 
+    end 
+  end)
+end
 -- }}}
