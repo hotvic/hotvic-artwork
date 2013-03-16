@@ -367,17 +367,25 @@ awful.rules.rules = {
             c:struts({right = winwidth})
             c:geometry({x = w_area.width - winwidth, width = winwidth, y = w_area.y, height = w_area.height})
         end
-    },
-    {rule = {class = "Aurora", role = "browser"},
-        properties = {tag = tags[1][1],
-            border_width = 0,
-        }
-    },
+    }, 
     {rule = {class = "Carrier", role = "conversation"},
         properties = {tag = tags[1][9],
             floating = false,
 --            maximized_vertical = true,
 --            maximized_horizontal = true
+        }
+    },
+    {rule = {class = "manaplus"},
+        properties = {
+            maximized_vertical = true,
+            maximized_horizontal = false,
+            size_hints_honor = false,
+            border_width = 0,
+        }
+    },
+    {rule = {class = "Aurora", role = "browser"},
+        properties = {tag = tags[1][1],
+            border_width = 0,
         }
     },
     -- Set Firefox to always map on tags number 2 of screen 1.
