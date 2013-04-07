@@ -46,6 +46,7 @@ theme.arch_icon              = "/usr/share/icons/Faenza/places/22/distributor-lo
 theme.bookmakrs_icon         = "/usr/share/icons/Faenza/places/16/user-bookmarks.png"
 theme.aurora_icon            = "/usr/share/icons/hicolor/16x16/apps/aurora.png"
 theme.carrier_icon           = "/usr/share/icons/hicolor/16x16/apps/carrier.png"
+theme.chromium_icon          = "/usr/share/icons/Faenza/apps/16/chromium-browser.png"
 theme.exaile_icon            = "/usr/share/icons/Faenza/apps/16/exaile.png"
 theme.gimp_icon              = "/usr/share/icons/Faenza/apps/16/gimp.png"
 

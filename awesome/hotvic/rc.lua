@@ -98,18 +98,19 @@ myawesomemenu = {
 
 appsmenu = {
     {"Aurora",  "env MOZ_DISABLE_PANGO=1 aurora",   beautiful.aurora_icon},
-    {"Carrier", "carrier",  beautiful.carrier_icon},
-    {"Exaile",  "exaile",   beautiful.exaile_icon},
-    {"GIMP",    "gimp",     beautiful.gimp_icon}
+    {"Carrier", "carrier",                          beautiful.carrier_icon},
+    {"Chromium", "chromium --audio-buffer-size=2048 --purge-memory-button",  beautiful.chromium_icon},
+    {"Exaile",  "exaile",                           beautiful.exaile_icon},
+    {"GIMP",    "gimp",                             beautiful.gimp_icon}
 }
 
 mymainmenu = awful.menu({
     items = {
-        {"Applications",    appsmenu,       beautiful.bookmakrs_icon},
-        {"Awesome",         myawesomemenu,  beautiful.awesome_icon},
-        {"Open Urxvt",      terminal},
-        {"Reboot", "gksu systemctl reboot"},
-        {"PowerOff", "gksu systemctl poweroff"}
+        {"Applications",    appsmenu,               beautiful.bookmakrs_icon},
+        {"Awesome",         myawesomemenu,          beautiful.awesome_icon},
+        {"Open XTerm",      terminal},
+        {"Reboot",          "gksu systemctl reboot"},
+        {"PowerOff",        "gksu systemctl poweroff"}
     }
 })
 
@@ -358,8 +359,10 @@ awful.rules.rules = {
         }
     },
     {rule = {class = "Carrier", role = "buddy_list"},
-        properties = {tag = tags[1][9],
-            floating = true
+        properties = {
+            tag = tags[1][9],
+            floating = true,
+            maximized_vertical = true,
         },
         callback = function(c)
             local w_area = screen[c.screen].workarea
@@ -367,9 +370,10 @@ awful.rules.rules = {
             c:struts({right = winwidth})
             c:geometry({x = w_area.width - winwidth, width = winwidth, y = w_area.y, height = w_area.height})
         end
-    }, 
+    },
     {rule = {class = "Carrier", role = "conversation"},
-        properties = {tag = tags[1][9],
+        properties = {
+            tag = tags[1][9],
             floating = false,
 --            maximized_vertical = true,
 --            maximized_horizontal = true
@@ -378,15 +382,22 @@ awful.rules.rules = {
     {rule = {class = "manaplus"},
         properties = {
             maximized_vertical = true,
-            maximized_horizontal = false,
+            maximized_horizontal = true,
             size_hints_honor = false,
             border_width = 0,
         }
     },
     {rule = {class = "Aurora", role = "browser"},
-        properties = {tag = tags[1][1],
+        properties = {
+            tag = tags[1][1],
             border_width = 0,
         }
+    },
+    {rule = {class = "Wine"},
+        properties = {
+            screen = 2,
+        }
+
     },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
