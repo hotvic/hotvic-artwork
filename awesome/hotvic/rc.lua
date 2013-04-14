@@ -339,7 +339,7 @@ awful.rules.rules = {
             focus = awful.client.focus.filter,
             keys = clientkeys,
             buttons = clientbuttons
-        }
+        },
     },
     {rule = {class = "MPlayer"},
         properties = {floating = true}
@@ -354,8 +354,10 @@ awful.rules.rules = {
         properties = {floating = true}
     },
     {rule = {class = "Gimp", role = "gimp-image-window"},
-        properties = {tag = tags[1][4],
+        properties = {
+            tag = tags[1][4],
             floating = false,
+            border_width = 0,
         }
     },
     {rule = {class = "Carrier", role = "buddy_list"},
@@ -393,11 +395,33 @@ awful.rules.rules = {
             border_width = 0,
         }
     },
+    {rule = {class = "Thunderbird", role = "3pane"},
+        properties = {
+            border_width = 0,
+        }
+    },
+    {rule = {class = "Thunderbird", role = "Msgcompose"},
+        properties = {
+            floating = true,
+        },
+        callback = function (c)
+            awful.placement.centered(c, nil)
+        end
+    },
     {rule = {class = "Wine"},
         properties = {
             screen = 2,
         }
 
+    },
+    {rule = {class = "Chromium", role = "browser"},
+        properties = {
+            border_width = 0,
+            maximized_vertical = true,
+            maximized_horizontal = true,
+            size_hints_honor = false,
+            floating = false,
+        }
     },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
