@@ -401,7 +401,7 @@ awful.rules.rules = {
             border_width = 0,
         }
     },
-    {rule = {class = "Aurora", role = "page-info"},
+    {rule = {class = "Aurora"}, except = {instance = "Navigator"},
         properties = {
             floating = true,
         }
