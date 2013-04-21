@@ -77,13 +77,19 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-    names = {"Web", "Ter", "Dev", "G", 5, 6, 7, "M", "IM"},
-    layouts = {layouts[2], layouts[2], layouts[2], layouts[2], layouts[2],
-                layouts[2], layouts[2], layouts[2], layouts[2]} 
-}
+    screen = {
+    {names = {"Web", "Ter", "Dev", "G", 5, 6, 7, "M", "IM"},
+        layouts = {layouts[2], layouts[2], layouts[2], layouts[2], layouts[2],
+                    layouts[2], layouts[2], layouts[2], layouts[2]}
+    },
+    {names = {"Mail", "Ter", "Dev", "Office", 5, 6, 7, "M"},
+        layouts = {layouts[2], layouts[4], layouts[2], layouts[2], layouts[2],
+        layouts[2],layouts[2],layouts[4]}
+    }
+}}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag(tags.names, s, tags.layouts)
+    tags[s] = awful.tag(tags.screen[s].names, s, tags.screen[s].layouts)
 end
 -- }}}
 
@@ -393,6 +399,11 @@ awful.rules.rules = {
         properties = {
             tag = tags[1][1],
             border_width = 0,
+        }
+    },
+    {rule = {class = "Aurora", role = "page-info"},
+        properties = {
+            floating = true,
         }
     },
     {rule = {class = "Thunderbird", role = "3pane"},
